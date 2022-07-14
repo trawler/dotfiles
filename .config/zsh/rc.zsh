@@ -43,7 +43,7 @@ export GO111MODULE=on
 export PATH="$(python -m site --user-base)/bin:${PATH}"
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$HOME/bin:/bin:/sbin:/usr/X11R6/bin:/usr/games:/usr/local/go/bin:${PATH}
 export PATH=$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:${PATH}:/usr/local/bin
-export PATH=/usr/local/kubebuilder/bin:/usr/bin:/usr/sbin:${PATH}
+export PATH=/usr/local/kubebuilder/bin:/usr/sbin:${PATH}
 
 # BASH Completion
 autoload -U +X compinit && compinit
