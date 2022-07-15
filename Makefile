@@ -1,5 +1,5 @@
 
-.PHONY: all install-brew install-brew-pkgs
+.PHONY: all install-brew install-brew-pkgs oh-my-zsh vim
 
 all: install-brew install-brew-pkgs
 
@@ -15,5 +15,13 @@ oh-my-zsh:
 	git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
 
 vim:
+	brew link vim # make sure we use brew version
 	vim +PluginInstall +qall
 	vim +PlugInstall +qall
+
+fonts:
+	git clone https://github.com/powerline/fonts.git --depth=1
+	cd fonts && ./install.sh
+
+clean:
+	-rm -rf fonts
