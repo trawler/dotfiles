@@ -11,10 +11,16 @@ install-brew-pkgs:
 	brew bundle --file=./.config/brew/Brewfile
 
 oh-my-zsh:
+	cd ~
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
 
 vim:
+	cd ~
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+	mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+	curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 	brew link vim # make sure we use brew version
 	vim +PluginInstall +qall
 	vim +PlugInstall +qall

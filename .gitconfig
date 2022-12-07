@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
 	name = Karen Almog
-	email = kalmog@mirantis.com
+	email = wrd4wrd@gmail.com
   signingkey = A570BFBE69852E0B24D41ED57C41900E77FFA4B4
 [credential]
   helper = osxkeychain
@@ -10,10 +10,6 @@
   status = auto
   branch = auto
   ui = true
-[url "https://kalmog@gerrit.mcp.mirantis.com/a/kubernetes/lcm"]
-	insteadOf = https://github.com/Mirantis/lcm
-[url "https://kalmog@gerrit.mcp.mirantis.com/a/kaas/core"]
-  insteadOf = https://github.com/kubernetes-sigs/cluster-api-provider-openstack
 [difftool "Kaleidoscope"]
       cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
