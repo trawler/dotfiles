@@ -1,13 +1,17 @@
-# Basic ZSH Configuration
+# Use spaceship theme
+
 ZSH_THEME="spaceship"
 autoload -U promptinit; promptinit
 export UPDATE_ZSH_DAYS=1
+
+# Enable autocorrection
 ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  asdf
   kubectl
   kops
   golang
@@ -35,31 +39,31 @@ plugins=(
   colorize
   common-aliases
   copyfile
-  spaceship-vi-mode
 )
 
-# Prompt Order
 SPACESHIP_PROMPT_ORDER=(
-  time
+#  time
   user
   host
   dir
   git
   node
+  ruby
+  xcode
+  swift
   golang
+  php
   rust
   docker
   venv
-  python
-  line_sep
-  vi_mode
   kubectl
+  line_sep
   char
-)
+  )
 
 # PROMPT
 SPACESHIP_CHAR_SYMBOL="  "
-#SPACESHIP_CHAR_SYMBOL=""
+#   SPACESHIP_CHAR_SYMBOL=" >> "
 SPACESHIP_PROMPT_ADD_NEWLINE=true
 SPACESHIP_PROMPT_SEPARATE_LINE=false
 SPACESHIP_PROMPT_PREFIXES_SHOW=true
@@ -101,7 +105,7 @@ SPACESHIP_DIR_COLOR="cyan"
 SPACESHIP_GIT_SHOW=true
 SPACESHIP_GIT_PREFIX="on "
 SPACESHIP_GIT_SUFFIX="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"
-SPACESHIP_GIT_SYMBOL=" "
+SPACESHIP_GIT_SYMBOL=" "
 
 # Git Branch Settings
 SPACESHIP_GIT_BRANCH_SHOW=true
@@ -151,10 +155,16 @@ SPACESHIP_VI_MODE_COLOR="white"
 SPACESHIP_KUBECTL_SHOW=true
 SPACESHIP_KUBECTL_ASYNC=true
 SPACESHIP_KUBECTL_COLOR="white"
-SPACESHIP_KUBECTL_PREFIX=""
-SPACESHIP_KUBECTL_SUFFIX=""
-SPACESHIP_KUBECTL_SYMBOL="☸️· "
+SPACESHIP_KUBECTL_PREFIX="\n using "  # Add a prefix with space
+SPACESHIP_KUBECTL_SUFFIX=""  # Add proper suffix
+SPACESHIP_KUBECTL_SYMBOL='⎈  '
 SPACESHIP_KUBECTL_CONTEXT_SHOW=true
+SPACESHIP_KUBECTL_CONTEXT_PREFIX=""
+SPACESHIP_KUBECTL_CONTEXT_SUFFIX=""
+
+# iTerm2 specific settings
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Python Settings
 SPACESHIP_PYTHON_SHOW=true

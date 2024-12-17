@@ -6,8 +6,8 @@ alias pro="cd documents/project/"
 alias opensource="cd documents/project/Open\ Source"
 alias appren="cd /documents/project/Apprehenticeship"
 alias personal="cd /document/project/Personal\ Projects"
-alias vi='vim'
-alias ls='ls --color=auto'
+alias ls='gls --color=auto -p'
+alias ll='ls -al'
 alias gr='git fetch --all && git reset --hard origin/master; git pull && git submodule update --init && git clean -fdx'
 alias grebase='git fetch upstream master && git rebase upstream/master'
 alias gmerge='git fetch upstream && git checkout master && git merge upstream/master'
