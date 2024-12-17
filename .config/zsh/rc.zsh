@@ -1,65 +1,63 @@
+# Locale settings
 export LC_ALL=en_US.UTF-8
-export EDITOR='vim'
 
+# Editor defaults
+export EDITOR=${EDITOR:-vim}
+export GIT_EDITOR=${GIT_EDITOR:-vim}
+
+# Configuration paths
 export CONFIG_HOME=$HOME/.config
 export ZSH_CONFIG_ROOT=$CONFIG_HOME/zsh
 export VIM_CONFIG_HOME=$CONFIG_HOME/vim
-
 export ZSH=$HOME/.oh-my-zsh
 
+# Homebrew completions
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-
-  autoload -Uz compinit
-  compinit
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+    autoload -Uz compinit
+    compinit
 fi
 
-# ZSH theme + prompt
-if [ -f $ZSH_CONFIG_ROOT/theme.zsh ]; then
-  source $ZSH_CONFIG_ROOT/theme.zsh
-fi
+# Source configuration files
+for config_file in theme ssh alias secrets; do
+    [[ -f $ZSH_CONFIG_ROOT/${config_file}.zsh ]] && source $ZSH_CONFIG_ROOT/${config_file}.zsh
+done
 
-# SSH Identities
-if [ -f $ZSH_CONFIG_ROOT/ssh.zsh ]; then
-  source $ZSH_CONFIG_ROOT/ssh.zsh
-fi
-
-# My useful aliases
-if [ -f $ZSH_CONFIG_ROOT/alias.zsh ]; then
-    source $ZSH_CONFIG_ROOT/alias.zsh
-fi
-
-# secrets
-if [ -f $ZSH_CONFIG_ROOT/secrets.zsh ]; then
-      source $ZSH_CONFIG_ROOT/secrets.zsh
-fi
-
-# Go
+# Go configuration
 export GOPATH="$HOME/go"
-export PATH=${GOPATH}/bin:${PATH}
+export GOBIN="$GOPATH/bin"
 export GO111MODULE=on
 
-# PATH
-export PATH="$(python -m site --user-base)/bin:${PATH}"
-export PATH=/usr/local/opt/coreutils/libexec/gnubin:$HOME/bin:/bin:/sbin:/usr/X11R6/bin:/usr/games:/usr/local/go/bin:${PATH}
-export PATH=$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:${PATH}:/usr/local/bin
-export PATH=/usr/local/kubebuilder/bin:/usr/sbin:${PATH}
+# Consolidated PATH
+typeset -U path  # Ensure PATH contains no duplicates
+path=(
+    $HOME/bin
+    $HOME/.cargo/bin
+    $HOME/.npm-global/bin
+    $HOME/.yarn/bin
+    $HOME/.config/yarn/global/node_modules/.bin
+    $GOPATH/bin
+    /usr/local/go/bin
+    /usr/local/bin
+    /usr/local/sbin
+    /usr/local/opt/openjdk@11/bin
+    /usr/local/kubebuilder/bin
+    /usr/bin
+    /usr/sbin
+    /bin
+    /sbin
+    $(python -m site --user-base)/bin
+    $path
+)
+export PATH
 
-# BASH Completion
+# ZSH completion
 autoload -U +X compinit && compinit
-source /usr/local/etc/bash_completion.d/az
-source <(kompose completion zsh)
-
-# npm global
-export PATH=~/.npm-global/bin:$PATH
-
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-export PATH="$PATH:$HOME/.rvm/bin"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-eval $(dircolors -b $HOME/.dircolors)
-export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
-
 fpath=($fpath ~/.oh-my-zsh/completions)
+
+# Google Cloud SDK
+for gcloud_config in path.zsh.inc completion.zsh.inc; do
+    [[ -f "$HOME/google-cloud-sdk/${gcloud_config}" ]] && source "$HOME/google-cloud-sdk/${gcloud_config}"
+done
+
+eval $(gdircolors ~/.config/zsh/dircolors.256dark)
