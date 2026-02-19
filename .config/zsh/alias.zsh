@@ -14,6 +14,6 @@ alias gmerge='git fetch upstream && git checkout master && git merge upstream/ma
 alias gtags='gotags -tag-relative=true -R=true -sort=true -f="tags" -fields=+l .'
 alias ggraph='git log --graph --full-history --all --color \
             --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
-alias python="/usr/local/bin/python3"
+alias python="/opt/homebrew/bin/python3"
 local ret_status="%(?:%{$fg[yellow]%}=> :%{$fg[red]%}=> %s)"
 
